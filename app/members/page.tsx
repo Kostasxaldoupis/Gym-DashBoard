@@ -5,6 +5,20 @@ import SearchForm from "../components/SearchForm";
 import TableView from "../components/TableView";
 import Pagination from "../components/Pagination";
 
+
+// import { revalidatePath } from "next/cache";
+
+// export async function deleteAllMembers() {
+//   // Delete memberships first because of foreign keys
+//   await prisma.membership.deleteMany();
+
+//   // Then delete members
+//   await prisma.member.deleteMany();
+
+//   revalidatePath("/");
+//   revalidatePath("/members");
+// }
+
 export default async function MemberPage({
   searchParams,
 }: {
@@ -24,7 +38,7 @@ export default async function MemberPage({
   // Names are stored lowercase at save time (in actions), so this stays consistent.
   const normalizedSearch = search?.trim().toLowerCase();
 
-  // Membership filters 
+  // Membership filters
   const membershipFilters: object[] = [
     ...(plan ? [{ planId: plan }] : []),
     ...(status === "active"
@@ -54,7 +68,7 @@ export default async function MemberPage({
   const totalPages = Math.ceil(totalMembers / pageSize);
   const safePage = Math.max(1, Math.min(currentPage, totalPages || 1));
 
-  //  Data fetch 
+  //  Data fetch
   const members = await prisma.member.findMany({
     where,
     skip: (safePage - 1) * pageSize,
@@ -72,12 +86,12 @@ export default async function MemberPage({
     orderBy: { firstName: "asc" },
   });
 
-  // Plan dropdown options 
+  // Plan dropdown options
   const plans = await prisma.plan.findMany({
     orderBy: { durationDays: "asc" },
   });
 
-  //  Pagination URL builder 
+  //  Pagination URL builder
   const createPageURL = (pageNumber: number) => {
     const params = new URLSearchParams();
     if (search) params.set("search", search);
@@ -87,7 +101,7 @@ export default async function MemberPage({
     return `/members?${params.toString()}`;
   };
 
-  // Pagination display range 
+  // Pagination display range
   const rangeStart = totalMembers === 0 ? 0 : (safePage - 1) * pageSize + 1;
   const rangeEnd = Math.min(safePage * pageSize, totalMembers);
 
@@ -114,6 +128,34 @@ export default async function MemberPage({
               + Add Member
             </Link>
           </div>
+          {/* <div className="mb-6 flex items-center justify-between">
+            <div>
+              <h1 className="text-3xl font-bold text-white">
+                Member Management
+              </h1>
+              <p className="text-slate-500">
+                Search, edit and manage gym members.
+              </p>
+            </div>
+
+            <div className="flex gap-3">
+              <form action={deleteAllMembers}>
+                <button
+                  type="submit"
+                  className="rounded-lg bg-red-600 px-5 py-3 font-medium text-white transition hover:bg-red-700"
+                >
+                  Delete All Members
+                </button>
+              </form>
+
+              <Link
+                href="/members/new"
+                className="rounded-lg bg-emerald-600 px-5 py-3 font-medium text-white transition hover:bg-emerald-700"
+              >
+                + Add Member
+              </Link>
+            </div>
+          </div> */}
 
           <SearchForm
             search={search}

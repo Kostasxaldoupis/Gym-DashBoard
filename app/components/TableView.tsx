@@ -76,10 +76,7 @@ export default function TableView({ members }: TableViewProps) {
         <tbody>
           {members.length === 0 ? (
             <tr>
-              <td
-                colSpan={8}
-                className="px-6 py-12 text-center text-slate-500"
-              >
+              <td colSpan={8} className="px-6 py-12 text-center text-slate-500">
                 No members found. Click{" "}
                 <span className="font-medium text-slate-300">Add Member</span>{" "}
                 to get started.
@@ -101,7 +98,7 @@ export default function TableView({ members }: TableViewProps) {
                     expiry.setHours(0, 0, 0, 0);
                     return Math.round(
                       (expiry.getTime() - today.getTime()) /
-                        (1000 * 60 * 60 * 24)
+                        (1000 * 60 * 60 * 24),
                     );
                   })()
                 : null;
@@ -115,9 +112,7 @@ export default function TableView({ members }: TableViewProps) {
                     {member.firstName} {member.lastName}
                   </td>
 
-                  <td className="px-6 py-4 text-slate-400">
-                    {member.phone}
-                  </td>
+                  <td className="px-6 py-4 text-slate-400">{member.phone}</td>
 
                   <td className="px-6 py-4 text-slate-400">
                     {member.email || "—"}
@@ -134,9 +129,7 @@ export default function TableView({ members }: TableViewProps) {
                   </td>
 
                   <td className="px-6 py-4 text-slate-300">
-                    {membership
-                      ? membership.endDate.toLocaleDateString()
-                      : "—"}
+                    {membership ? membership.endDate.toLocaleDateString() : "—"}
                   </td>
 
                   <td className="px-6 py-4">
@@ -177,8 +170,15 @@ export default function TableView({ members }: TableViewProps) {
                         Card
                       </Link>
 
-                      {membership && (
-                        membership.active ? (
+                      {/* <Link
+                        href={`/members/${member.id}/renew`}
+                        className="inline-flex items-center justify-center rounded-md bg-emerald-600 px-3 py-1.5 text-sm font-medium text-white transition hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-slate-900"
+                      >
+                        Renew
+                      </Link> */}
+
+                      {membership &&
+                        (membership.active ? (
                           <form action={pauseSubscription}>
                             <input
                               type="hidden"
@@ -206,8 +206,7 @@ export default function TableView({ members }: TableViewProps) {
                               Resume
                             </button>
                           </form>
-                        )
-                      )}
+                        ))}
                     </div>
                   </td>
                 </tr>

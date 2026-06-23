@@ -44,4 +44,3 @@ next-env.d.ts
 
 # database 
 migrations
-migrations/dev.db

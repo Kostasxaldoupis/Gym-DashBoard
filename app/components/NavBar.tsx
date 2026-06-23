@@ -12,7 +12,7 @@ export default function NavBar() {
         </Link>
       </div>
 
-      <div className="flex gap-4">
+      {/* <div className="flex gap-4">
         <Link
           href="/"
           className="rounded-lg px-4 py-2 text-slate-300 transition hover:bg-slate-800 hover:text-white"
@@ -37,7 +37,14 @@ export default function NavBar() {
         >
           Scan Card
         </Link>
-      </div>
+
+        <Link
+          href="/admin"
+          className="rounded-lg bg-sky-800 px-6 py-3 font-semibold text-white"
+        >
+          Admin
+        </Link>
+      </div> */}
     </nav>
   );
 }

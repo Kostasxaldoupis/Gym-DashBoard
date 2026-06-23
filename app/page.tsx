@@ -5,18 +5,18 @@ import Navbar from "./components/NavBar";
 export default async function HomePage() {
   const totalMembers = await prisma.member.count();
 
-const activeMembers = await prisma.member.count({
-  where: {
-    memberships: {
-      some: {
-        active: true,
-        endDate: {
-          gte: new Date(),
+  const activeMembers = await prisma.member.count({
+    where: {
+      memberships: {
+        some: {
+          active: true,
+          endDate: {
+            gte: new Date(),
+          },
         },
       },
     },
-  },
-});
+  });
 
   const pausedMembers = await prisma.membership.count({
     where: {
@@ -94,6 +94,13 @@ const activeMembers = await prisma.member.count({
               className="rounded-lg bg-purple-600 px-6 py-3 font-semibold hover:bg-purple-700"
             >
               Scan QR Code
+            </Link>
+
+            <Link
+              href="/admin"
+              className="rounded-lg bg-sky-800 px-6 py-3 font-semibold text-white"
+            >
+              Admin
             </Link>
           </div>
         </div>

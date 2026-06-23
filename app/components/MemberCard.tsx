@@ -39,7 +39,7 @@ export default function MemberCard({ member }: MemberCardProps) {
     <div className="w-full max-w-md rounded-2xl bg-slate-800 p-8 shadow-xl">
       <Link
         href="/"
-        className="mb-6 inline-block text-sm text-blue-400 hover:underline"
+        className="mb-6 inline-block text-sm text-emerald-400 hover:underline"
       >
         ← Back to Dashboard
       </Link>
